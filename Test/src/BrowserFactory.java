@@ -25,10 +25,13 @@ public class BrowserFactory {
 	
 	private static WebDriver GetChrome() {
 		String currentDir = System.getProperty("user.dir");
-		String chromeDriverPath = currentDir + /*File.separator +*/  "\\Framework\\Drivers\\chromedriver.exe";
+		//String chromeDriverPath = currentDir + /*File.separator +*/  "\\Framework\\Drivers\\chromedriver.exe";
 		
 		
-		System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+		String chromeDriverRelativePath = String.format("%sFramework%sDrivers%schromedriver.exe", File.separator, File.separator, File.separator);	
+		String path = String.join(currentDir, chromeDriverRelativePath);
+		
+		System.setProperty("webdriver.chrome.driver", path);
 		return new ChromeDriver(); 
 	}
 }

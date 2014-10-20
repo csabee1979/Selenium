@@ -29,8 +29,8 @@ public class BrowserFactory {
 		
 		
 		String chromeDriverRelativePath = String.format("%sFramework%sDrivers%schromedriver.exe", File.separator, File.separator, File.separator);	
-		String path = String.join(currentDir, chromeDriverRelativePath);
-		
+		//String path = String.join(currentDir, chromeDriverRelativePath);
+		String path = currentDir + chromeDriverRelativePath;
 		System.setProperty("webdriver.chrome.driver", path);
 		return new ChromeDriver(); 
 	}

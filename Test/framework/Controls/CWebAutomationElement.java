@@ -1,12 +1,17 @@
 package Controls;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import TypeExtensions.CStringExtension;
 
 public class CWebAutomationElement {
 	private WebElement _webElement;
@@ -174,5 +179,22 @@ public class CWebAutomationElement {
     public String getValue()
     {
         return _webElement.getAttribute("value");
+    }
+    
+    public <T extends CWebAutomationElement> T GetElement(By byContraint){
+    	T element = (T)_webElement.findElement(byContraint);
+    	//Todo: megnézni, ha nem találja mi legyen
+    	
+    	if (element == null){
+    		element = (T) new CWebAutomationElement(null, _driver);    	  		
+        }
+    
+    	return element;
+    }
+    
+    public <T extends CWebAutomationElement> List<T> GetElements(By byContraint){
+    	
+    	//Todo: megnézni, ha nem találja mi legyen
+    	return (List<T>)_webElement.findElements(byContraint);
     }
 }

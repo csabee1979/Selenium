@@ -1,6 +1,9 @@
 import org.junit.*;
 import org.openqa.selenium.*;
 
+import Browsers.CBrowserFactory;
+import Browsers.CWebBrowser;
+
 public class FirstSeleniumTest extends CTestBase {
 // Search using keyword through Google search
 	  @Test
@@ -13,6 +16,11 @@ public class FirstSeleniumTest extends CTestBase {
 	        //Click Search button
 	        driver.findElement(By.name("btnG")).click();
 	        Thread.sleep(10000);
+	  }
+	  
+	  @Test
+	  public void test2() throws Exception {
+		  CWebBrowser browser = CBrowserFactory.GetBrowser();
 	  }
 	  
 	  /*

@@ -1,4 +1,4 @@
-package selenium.framework;
+package PageObjectBase;
 
 import org.openqa.selenium.WebDriver;
 

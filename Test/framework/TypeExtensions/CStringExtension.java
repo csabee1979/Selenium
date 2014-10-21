@@ -1,4 +1,4 @@
-package selenium.framework;
+package TypeExtensions;
 
 abstract public class CStringExtension {
 	public static boolean isNullOrEmpty(String s){

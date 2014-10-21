@@ -1,4 +1,4 @@
-package selenium.framework;
+package Controls;
 
 import org.openqa.selenium.WebDriver;
 

@@ -1,5 +1,7 @@
 package Browsers;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,7 @@ import org.openqa.selenium.interactions.Mouse;
 import Controls.CAlertDialog;
 import Controls.CConfirmDialog;
 import Controls.CWebAutomationElement;
+import Controls.CWebInput;
 
 public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 
@@ -38,7 +41,8 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 		setScriptExecutor(((JavascriptExecutor)getDriver()));
 		setAlertDialog(new CAlertDialog(getDriver()));
 		setConfirmDialog(new CConfirmDialog(getDriver()));
-
+		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		this.driver.manage().window().maximize();
 	}
 	
 
@@ -115,15 +119,17 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 		return getDriver().getCurrentUrl();
 	}
 	
-    public void GoTo(String url)
+    public void goTo(String url)
     {
     	this.driver.navigate().to(url);
+    	this.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+    	this.refreshDocument();
     }
 
     /// <summary>
     /// Calles back on browser.
     /// </summary>
-    public void Back()
+    public void back()
     {
     	this.driver.navigate().back();
     }
@@ -131,15 +137,15 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
     /// <summary>
     /// Calles forward on browser.
     /// </summary>
-    public void Forward()
+    public void forward()
     {
-    	his.driver.navigate().forward();
+    	this.driver.navigate().forward();
     }
 
     /// <summary>
     /// Calles refresh on browser.
     /// </summary>
-    public void Refresh()
+    public void refresh()
     {
         this.driver.navigate().refresh();
     }
@@ -147,5 +153,21 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 	public void close(){
 		this.driver.close();
 	}
+	
+	public CWebAutomationElement getDocument()
+	{
+		return new CWebAutomationElement(driver.findElement(By.xpath("/*")), driver);
+	}
+	
+	public void refreshDocument()
+	{
+		super.refreshDocument();
+	}
+
+    public CWebInput getWebInput(By byConstraint)
+    {
+    	refreshDocument();
+    	return new CWebInput(getWebElement().findElement(byConstraint), driver);
+    }
 	
 }

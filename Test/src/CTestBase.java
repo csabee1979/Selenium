@@ -6,11 +6,11 @@ public class CTestBase {
 	protected WebDriver driver;
 	  @Before
 	  public void setUp() throws Exception {	  
-		  driver = BrowserFactory.GetBrowser();
+		  //driver = BrowserFactory.GetBrowser();
 	  }
 	  
 	  @After
 	  public void tearDown() throws Exception {
-	    driver.quit();
+	    //driver.quit();
 	  }
 }

@@ -200,46 +200,7 @@ public class CWebAutomationElement {
     		_action.release(getWebElement()).perform();
     	}
     }
-    
-    
-    /*
-    private <T extends CWebAutomationElement> T getInstance()
-    {
-    	final Class<T> type;
-    	return type.newInstance();
-    }
-    
-    public <T extends CWebAutomationElement> T getElement(By byConstraint){
-    	refreshDocument();
-    	final Class<T> type;
-    	
-    	//Class.getDeclaredConstructor(String.class).newInstance("HERESMYARG");
-    	//Class.getDeclaredConstructo(T).new
-    	CWebAutomationElement element 
-    	element.setWebElement(_webElement);
-    	element.setDriver(_driver);
-    
-    	//CWebAutomationElement element = new T(_webElement.findElement(byConstraint), _driver);
-    	//Todo: megnézni, ha nem találja mi legyen
-    	
-    	
-    	
-    	if (element == null){
-    		element = (T) c  	  		
-        }
-    
-    	return (T)element;
-    }
-    
-    public <T extends CWebAutomationElement> List<T> getElements(By byConstraint){
-    	refreshDocument();
-    	//Todo: megnézni, ha nem találja mi legyen
-    	return (List<T>)_webElement.findElements(byConstraint);
-    }
-   */
-    
-    
-    
+       
     public CWebInput getWebInput(final By byConstraint){
     	return new CWebInput(getWebElement().findElement(byConstraint), _driver);
     }
@@ -276,6 +237,23 @@ public class CWebAutomationElement {
     	//return new CWebInput(getWebElement().findElement(byConstraint), _driver);
     }
     
+    public CWebSelect getWebSelect(final By byConstraint){
+    	return new CWebSelect(getWebElement().findElement(byConstraint), _driver);
+    }
+
+    public List<CWebSelect> getWebSelects(){
+    	final String elementName = "select";
+    	final List<CWebSelect> selectList = new ArrayList<CWebSelect>(); 
+    	final List<WebElement> elementList = _webElement.findElements(By.cssSelector(elementName));
+    	
+    	for (final WebElement element: elementList){
+    		selectList.add(new CWebSelect(element, _driver));
+    	}
+    	
+    	return selectList;   	
+    }
+    
+    
     public WebElement getWebElement(final By byConstraint){
     	refreshDocument();
     	final WebElement e = _webElement.findElement(byConstraint);
@@ -283,6 +261,8 @@ public class CWebAutomationElement {
     	return e;
     }
 
-
+    public WebElement getCurrentWebElement() {
+    	return getWebElement();
+    }
     
 }

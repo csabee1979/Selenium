@@ -7,6 +7,7 @@ import org.openqa.selenium.*;
 
 import Browsers.CBrowserFactory;
 import Browsers.CWebBrowser;
+import Configuration.DefaultConfigurationSettings;
 import Controls.CWebButton;
 import Controls.CWebInput;
 import Pages.CGooglePage;
@@ -27,7 +28,7 @@ public class FirstSeleniumTest extends CTestBase {
 	  
 	  //@Test
 	  public void test2() throws Exception {
-		  CWebBrowser browser = CBrowserFactory.GetBrowser();
+		  //CWebBrowser browser = CBrowserFactory.GetBrowser();
 		  browser.goTo("http://www.google.com");
 		  browser.refreshDocument();
 		  //WebElement e = browser.getDriver().findElement(By.name("q"));
@@ -47,14 +48,15 @@ public class FirstSeleniumTest extends CTestBase {
 	  
 	  @Test
 	  public void test3() throws Exception {
-		  CWebBrowser browser = CBrowserFactory.GetBrowser();
-		  browser.goTo("http://www.google.com");
-		  browser.refreshDocument();
-		  //WebElement e = browser.getDriver().findElement(By.name("q"));
-		  CGooglePage page = new CGooglePage(browser);
-		  page.search("index.hu");
-
-		  //browser.close();
+		  try{
+			  browser.goTo(DefaultConfigurationSettings.getDefaultUrl());
+			  browser.refreshDocument();
+			  CGooglePage page = new CGooglePage(browser);
+			  page.search("index.hu");
+		  }
+		  catch(Exception e){
+		  	e.printStackTrace();
+		  }	  
 	  }
 	  
 	  /*

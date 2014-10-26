@@ -164,10 +164,12 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 		super.refreshDocument();
 	}
 
+	/*
     public CWebInput getWebInput(By byConstraint)
     {
     	refreshDocument();
     	return new CWebInput(getWebElement().findElement(byConstraint), driver);
     }
+    */
 	
 }

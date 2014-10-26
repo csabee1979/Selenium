@@ -1,4 +1,6 @@
-/Drivers
-/Browsers
-/Controls
-/Pages
+/Configuration/
+/Browsers/
+/SelectTests.class
+/Controls/
+/Pages/
+/PageObjectBase/

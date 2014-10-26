@@ -2,11 +2,13 @@ package PageObjectBase;
 
 import org.openqa.selenium.WebDriver;
 
+import Browsers.CWebBrowser;
+
 abstract public class CPageBase {
-	protected WebDriver driver;
-	public CPageBase(WebDriver driver){
-		this.driver = driver;
+	protected CWebBrowser browser;
+	public CPageBase(CWebBrowser browser){
+		this.browser = browser;
 	}
 	
-	abstract boolean IsDisplayed();
+	public abstract boolean IsDisplayed();
 }

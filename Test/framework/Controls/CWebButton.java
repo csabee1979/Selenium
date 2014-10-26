@@ -13,8 +13,7 @@ public class CWebButton extends CWebAutomationElement {
 
 	public String getValue(){
 		
-		String value;
-		value = getWebElement().getAttribute("value");
+		String value = getWebElement().getAttribute("value");
 		
 		if (value.length() == 0){
 			 return getWebElement().getText();

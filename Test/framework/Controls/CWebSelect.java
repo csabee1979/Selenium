@@ -65,7 +65,7 @@ public class CWebSelect extends CWebAutomationElement {
     }
     
     public List<CWebOption> getAllSelectedOptions(){
-    	List<WebElement> options = selectElement.getAllSelectedOptions();
+    	List<WebElement> options = selectElement.getAllSelectedOptions() ;
     	List<CWebOption> webOptions = new ArrayList<CWebOption>(); 
     	
     	for(WebElement option : options) {

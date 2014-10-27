@@ -161,7 +161,7 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 	
 	public void refreshDocument()
 	{
-		super.refreshDocument();
+		setWebElement(driver.findElement(By.xpath("/*")));
 	}
 
 	/*

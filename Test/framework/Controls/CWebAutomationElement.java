@@ -34,10 +34,6 @@ public class CWebAutomationElement {
 		_mouse = ((HasInputDevices)_driver).getMouse();
 	}
 	
-	protected void refreshDocument() {
-		this._driver.findElement(By.xpath("/*"));
-	}
-	
 	protected WebElement getWebElement() {
 		return _webElement;
 	}
@@ -255,10 +251,7 @@ public class CWebAutomationElement {
     
     
     public WebElement getWebElement(final By byConstraint){
-    	refreshDocument();
-    	final WebElement e = _webElement.findElement(byConstraint);
-    	
-    	return e;
+        return  _webElement.findElement(byConstraint);   	
     }
 
     public WebElement getCurrentWebElement() {

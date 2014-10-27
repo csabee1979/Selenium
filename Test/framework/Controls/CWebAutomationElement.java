@@ -1,5 +1,8 @@
 package Controls;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -254,6 +257,16 @@ public class CWebAutomationElement {
         return  _webElement.findElement(byConstraint);   	
     }
 
+    public <T extends CWebAutomationElement> T getElement(Class<T> element, final By byConstraint) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{        
+    	try{
+	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class);
+	    	return constructor.newInstance( _webElement.findElement(byConstraint), getDriver());
+    	}
+    	catch (NoSuchMethodException e) {
+    		return element.newInstance();
+    	}
+    }
+    
     public WebElement getCurrentWebElement() {
     	return getWebElement();
     }

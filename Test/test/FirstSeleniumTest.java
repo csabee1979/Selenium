@@ -51,6 +51,9 @@ public class FirstSeleniumTest extends CTestBase {
 		  try{
 			  browser.goTo(DefaultConfigurationSettings.getDefaultUrl());
 			  browser.refreshDocument();
+			  //CWebInput input = browser.<CWebInput>getElement(By.name("q"));
+			  /*CWebInput input = browser.getElement(CWebInput.class, By.name("q"));
+			  input.TypeText("0");*/
 			  CGooglePage page = new CGooglePage(browser);
 			  page.search("index.hu");
 		  }

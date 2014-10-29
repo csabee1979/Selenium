@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import Browsers.CWebBrowser;
-import Controls.CWebButton;
-import Controls.CWebInput;
+import Controls.HtmlButton;
+import Controls.HtmlInput;
 
 public class CGooglePage extends CPageBase {
 
@@ -17,8 +17,8 @@ public class CGooglePage extends CPageBase {
 		init();
 	}
 
-	private CWebInput searchBox;
-	private CWebButton searchButton;
+	private HtmlInput searchBox;
+	private HtmlButton searchButton;
 	
 
 	@Override
@@ -33,7 +33,7 @@ public class CGooglePage extends CPageBase {
 	}
 	
 	private void init() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
-		searchBox = browser.getElement(CWebInput.class, By.name("q"));//browser.getWebInput(By.name("q"));
-		searchButton = browser.getElement(CWebButton.class, By.name("btnG"));//browser.getWebButton(By.name("btnG"));
+		searchBox = browser.getElement(HtmlInput.class, By.name("q"));//browser.getWebInput(By.name("q"));
+		searchButton = browser.getElement(HtmlButton.class, By.name("btnG"));//browser.getWebButton(By.name("btnG"));
 	}
 }

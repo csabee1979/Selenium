@@ -8,8 +8,8 @@ import org.openqa.selenium.*;
 import Browsers.CBrowserFactory;
 import Browsers.CWebBrowser;
 import Configuration.DefaultConfigurationSettings;
-import Controls.CWebButton;
-import Controls.CWebInput;
+import Controls.HtmlButton;
+import Controls.HtmlInput;
 import Pages.CGooglePage;
 
 public class FirstSeleniumTest extends CTestBase {
@@ -33,13 +33,13 @@ public class FirstSeleniumTest extends CTestBase {
 		  browser.refreshDocument();
 		  //WebElement e = browser.getDriver().findElement(By.name("q"));
 
-		  CWebInput el = browser.getDocument().getWebInput(By.name("q"));
+		  HtmlInput el = browser.getDocument().getWebInput(By.name("q"));
 		  el.TypeText("selenium");
 		  
-		  List<CWebInput> inputs = browser.getDocument().getWebInputs();
+		  List<HtmlInput> inputs = browser.getDocument().getWebInputs();
 		  Assert.assertEquals("selenium", el.getValue());
-		  CWebButton button = browser.getDocument().getWebButton(By.name("btnG"));
-		  List<CWebButton> buttons = browser.getDocument().getWebButtons();
+		  HtmlButton button = browser.getDocument().getWebButton(By.name("btnG"));
+		  List<HtmlButton> buttons = browser.getDocument().getWebButtons();
 		  button.click();
 		  //CWebInput q = browser.<CWebInput>getElement(By.name("q"));
 		  Thread.sleep(2000);

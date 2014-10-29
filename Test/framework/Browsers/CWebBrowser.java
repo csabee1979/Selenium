@@ -13,10 +13,10 @@ import org.openqa.selenium.interactions.Mouse;
 
 import Controls.CAlertDialog;
 import Controls.CConfirmDialog;
-import Controls.CWebAutomationElement;
-import Controls.CWebInput;
+import Controls.HtmlElementBase;
+import Controls.HtmlInput;
 
-public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
+public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 
 	private CWebBrowser(WebElement webElement, WebDriver driver) {
 		super(webElement, driver);
@@ -148,9 +148,9 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 		this.driver.close();
 	}
 	
-	public CWebAutomationElement getDocument()
+	public HtmlElementBase getDocument()
 	{
-		return new CWebAutomationElement(driver.findElement(By.xpath("/*")), driver);
+		return new HtmlElementBase(driver.findElement(By.xpath("/*")), driver);
 	}
 	
 	public void refreshDocument()

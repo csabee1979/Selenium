@@ -2,7 +2,7 @@ package Pages;
 
 import org.openqa.selenium.By;
 import Browsers.CWebBrowser;
-import Controls.CWebSelect;
+import Controls.HtmlSelect;
 import PageObjectBase.CPageBase;
 
 public class CLocalhostIndexPage extends CPageBase{
@@ -22,7 +22,7 @@ public class CLocalhostIndexPage extends CPageBase{
 		getSelect().selecOptiontByVisibleText(name);
 	}
 
-	private CWebSelect getSelect(){
+	private HtmlSelect getSelect(){
 		return browser.getDocument().getWebSelect(By.tagName("select"));
 	}
 

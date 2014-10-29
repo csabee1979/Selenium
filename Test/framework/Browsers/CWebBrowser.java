@@ -134,17 +134,11 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
     	this.driver.navigate().back();
     }
 
-    /// <summary>
-    /// Calles forward on browser.
-    /// </summary>
     public void forward()
     {
     	this.driver.navigate().forward();
     }
 
-    /// <summary>
-    /// Calles refresh on browser.
-    /// </summary>
     public void refresh()
     {
         this.driver.navigate().refresh();
@@ -164,12 +158,5 @@ public class CWebBrowser extends CWebAutomationElement implements WebBrowser {
 		setWebElement(driver.findElement(By.xpath("/*")));
 	}
 
-	/*
-    public CWebInput getWebInput(By byConstraint)
-    {
-    	refreshDocument();
-    	return new CWebInput(getWebElement().findElement(byConstraint), driver);
-    }
-    */
 	
 }

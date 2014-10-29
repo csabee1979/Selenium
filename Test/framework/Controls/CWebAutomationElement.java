@@ -257,8 +257,8 @@ public class CWebAutomationElement {
         return  _webElement.findElement(byConstraint);   	
     }
 
-    public <T extends CWebAutomationElement> T getElement(Class<T> element, final By byConstraint) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{        
-    	try{
+    public <T extends CWebAutomationElement> T getElement(Class<T> element, final By byConstraint) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException{        
+    	try {
 	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class);
 	    	return constructor.newInstance( _webElement.findElement(byConstraint), getDriver());
     	}

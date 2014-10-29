@@ -32,7 +32,7 @@ public class FirstSeleniumTest extends CTestBase {
 		  browser.goTo("http://www.google.com");
 		  browser.refreshDocument();
 		  //WebElement e = browser.getDriver().findElement(By.name("q"));
-
+/*
 		  HtmlInput el = browser.getDocument().getWebInput(By.name("q"));
 		  el.TypeText("selenium");
 		  
@@ -44,6 +44,7 @@ public class FirstSeleniumTest extends CTestBase {
 		  //CWebInput q = browser.<CWebInput>getElement(By.name("q"));
 		  Thread.sleep(2000);
 		  browser.close();
+		  */
 	  }
 	  
 	  @Test

@@ -1,13 +1,14 @@
 package Controls;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HtmlInput extends HtmlElementBase {
 
 
-	public HtmlInput(WebElement webElement, WebDriver driver) {
-		super(webElement, driver);
+	public HtmlInput(WebElement webElement, WebDriver driver, By locator) {
+		super(webElement, driver, locator);
 	}
 
 	public String getValue() {

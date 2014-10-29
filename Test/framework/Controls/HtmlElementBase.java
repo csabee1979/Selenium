@@ -29,19 +29,24 @@ public class HtmlElementBase {
 	private final WebDriver _driver;
 	private final Actions _action;
 	private final Mouse _mouse;
-	private By locator;
+	private By _locator;
 	
-	public HtmlElementBase(final WebElement webElement, final WebDriver driver) {
+	public HtmlElementBase(final WebElement webElement, final WebDriver driver, By locator) {
 		this.setWebElement(webElement);
 		this._driver = driver;
 		_action = new Actions(_driver);
 		_mouse = ((HasInputDevices)_driver).getMouse();
+		_locator = locator;
 	}
 	
 	protected WebElement getWebElement() {
 		return _webElement;
 	}
 
+	protected By getLocator() {
+		return _locator;
+	}
+	
 	protected void setWebElement(final WebElement webElement) {
 		this._webElement = _webElement;
 	}
@@ -51,7 +56,7 @@ public class HtmlElementBase {
     }
 
     public HtmlElementBase getParent() {
-        return new HtmlElementBase(getWebElement().findElement(By.xpath("..")), _driver);
+        return new HtmlElementBase(getWebElement().findElement(By.xpath("..")), _driver, By.xpath(".."));
     }
 
     public String getClassName() {
@@ -200,7 +205,7 @@ public class HtmlElementBase {
     		_action.release(getWebElement()).perform();
     	}
     }
-       
+    /*   
     public HtmlInput getWebInput(final By byConstraint){
     	return new HtmlInput(getWebElement().findElement(byConstraint), _driver);
     }
@@ -218,18 +223,19 @@ public class HtmlElementBase {
     	
     	//return new CWebInput(getWebElement().findElement(byConstraint), _driver);
     }
-    
+    */
+    /*
     public HtmlButton getWebButton(final By byConstraint){
     	return new HtmlButton(getWebElement().findElement(byConstraint), _driver);
     }
-
+*/
     public List<HtmlButton> getWebButtons(){
     	final String elementName = "button";
     	final List<HtmlButton> buttonList = new ArrayList<HtmlButton>(); 
     	final List<WebElement> elementList = _webElement.findElements(By.cssSelector(elementName));
     	
     	for (final WebElement element: elementList){
-    		buttonList.add(new HtmlButton(element, _driver));
+    		buttonList.add(new HtmlButton(element, _driver, By.cssSelector(elementName)));
     	}
     	
     	return buttonList;
@@ -237,6 +243,7 @@ public class HtmlElementBase {
     	//return new CWebInput(getWebElement().findElement(byConstraint), _driver);
     }
     
+    /*
     public HtmlSelect getWebSelect(final By byConstraint){
     	return new HtmlSelect(getWebElement().findElement(byConstraint), _driver);
     }
@@ -252,20 +259,29 @@ public class HtmlElementBase {
     	
     	return selectList;   	
     }
-    
+    */
     
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
 
-    public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException{        
+    public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés       
     	try {
-	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class);
-	    	return constructor.newInstance( _webElement.findElement(byConstraint), getDriver());
+	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
+	    	return constructor.newInstance( _webElement.findElement(byConstraint), getDriver(), byConstraint);
     	}
     	catch (NoSuchMethodException e) {
-    		return element.newInstance();
-    	}
+    		throw new RuntimeException(e);
+    	} 
+        catch (InstantiationException e){
+          throw new RuntimeException(e);
+        }
+        catch (IllegalAccessException e) {
+          throw new RuntimeException(e);
+        }
+        catch (InvocationTargetException e){
+          throw new RuntimeException(e);
+        }
     }
     
     public WebElement getCurrentWebElement() {

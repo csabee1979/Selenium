@@ -19,7 +19,7 @@ import Controls.HtmlInput;
 public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 
 	private CWebBrowser(WebElement webElement, WebDriver driver) {
-		super(webElement, driver);
+		super(webElement, driver, By.xpath("/*"));
 		// TODO Auto-generated constructor stub
 	}
 
@@ -150,7 +150,7 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 	
 	public HtmlElementBase getDocument()
 	{
-		return new HtmlElementBase(driver.findElement(By.xpath("/*")), driver);
+		return new HtmlElementBase(driver.findElement(By.xpath("/*")), driver, By.xpath("/*"));
 	}
 	
 	public void refreshDocument()

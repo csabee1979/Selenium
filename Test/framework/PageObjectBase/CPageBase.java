@@ -1,5 +1,7 @@
 package PageObjectBase;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.openqa.selenium.WebDriver;
 
 import Browsers.CWebBrowser;

@@ -2,6 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -9,14 +11,14 @@ import org.openqa.selenium.support.ui.Select;
 public class HtmlSelect extends HtmlElementBase {
 	private Select selectElement;
 
-	public HtmlSelect(WebElement webElement, WebDriver driver) {
-		super(webElement, driver);
+	public HtmlSelect(WebElement webElement, WebDriver driver, By locator) {
+		super(webElement, driver, locator);
 		// TODO Auto-generated constructor stub
 		selectElement = new Select(_webElement);
 	}
 
     public HtmlOption getSelectedOption() {
-    	return new HtmlOption(selectElement.getFirstSelectedOption(), getDriver());
+    	return new HtmlOption(selectElement.getFirstSelectedOption(), getDriver(), getLocator());
     }
     
     public boolean isMultiple() {
@@ -58,7 +60,7 @@ public class HtmlSelect extends HtmlElementBase {
     	List<HtmlOption> webOptions = new ArrayList<HtmlOption>(); 
     	
     	for(WebElement option : options) {
-    		webOptions.add(new HtmlOption(option, getDriver()));
+    		webOptions.add(new HtmlOption(option, getDriver(), getLocator()));//Todo: megnézni
     	}
     	
     	return webOptions;
@@ -69,7 +71,7 @@ public class HtmlSelect extends HtmlElementBase {
     	List<HtmlOption> webOptions = new ArrayList<HtmlOption>(); 
     	
     	for(WebElement option : options) {
-    		webOptions.add(new HtmlOption(option, getDriver()));
+    		webOptions.add(new HtmlOption(option, getDriver(), getLocator()));
     	}
     	
     	return webOptions;

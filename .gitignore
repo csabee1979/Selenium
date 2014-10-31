@@ -9,7 +9,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # binfolder
-bin/
+Test/bin/*
 
 # Windows Installer files
 *.cab

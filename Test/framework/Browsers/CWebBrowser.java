@@ -126,9 +126,6 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
     	this.refreshDocument();
     }
 
-    /// <summary>
-    /// Calles back on browser.
-    /// </summary>
     public void back()
     {
     	this.driver.navigate().back();

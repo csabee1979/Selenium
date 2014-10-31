@@ -1,16 +1,9 @@
 package PageObjectBase;
 
-import java.lang.reflect.InvocationTargetException;
-
-import org.openqa.selenium.WebDriver;
-
 import Browsers.CWebBrowser;
 
-abstract public class CPageBase {
-	protected CWebBrowser browser;
+abstract public class CPageBase extends CControlBase {
 	public CPageBase(CWebBrowser browser){
-		this.browser = browser;
+		super(browser);
 	}
-	
-	public abstract boolean IsDisplayed();
 }

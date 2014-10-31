@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
@@ -21,6 +22,13 @@ import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.thoughtworks.selenium.Wait;
 
 import TypeExtensions.CStringExtension;
 
@@ -48,7 +56,7 @@ public class HtmlElementBase {
 	}
 	
 	protected void setWebElement(final WebElement webElement) {
-		this._webElement = _webElement;
+		this._webElement = webElement;
 	}
 	
     public String getId() {
@@ -265,6 +273,14 @@ public class HtmlElementBase {
         return  _webElement.findElement(byConstraint);   	
     }
 
+    public void attachToFrame(String frameId) {
+    	getDriver().switchTo().frame(frameId);
+    }
+    
+    public void detacheFrame() {
+    	getDriver().switchTo().defaultContent();
+    }
+    
     public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés       
     	try {
 	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
@@ -292,4 +308,26 @@ public class HtmlElementBase {
     	return "";
     }
     
+    public void waitForElementToBeVisible() {
+    	new FluentWait<WebDriver>(getDriver()).
+                withTimeout(3, TimeUnit.SECONDS).
+                pollingEvery(50, TimeUnit.MILLISECONDS).
+                ignoring(NoSuchElementException.class).
+                	until(new Predicate<WebDriver>() {
+						@Override
+						public boolean apply(WebDriver driver) {
+							return getCurrentWebElement().isDisplayed();
+						}
+				});
+    }
+    
+    public void waitUntilButtonToBeVisible(int sec) {
+    	WebDriverWait wait = new WebDriverWait(getDriver(), sec);
+        wait.until(new Function<WebDriver, WebElement>() {
+    	     public WebElement apply(WebDriver driver) {
+    	       return getCurrentWebElement();  	    		   
+    	     }
+    	   });
+
+    }
 }

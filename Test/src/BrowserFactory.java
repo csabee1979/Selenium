@@ -12,18 +12,30 @@ public class BrowserFactory {
 	
 	public static WebDriver GetBrowser() {
 		// TODO Auto-generated method stub
-		WebDriver driver = GetChrome();
+		WebDriver driver = getChrome();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		
 		return driver;
 	}
 	
-	private static WebDriver GetFireFox(){
+	private static WebDriver getFireFox(){
 		return new FirefoxDriver();
 	}
 	
-	private static WebDriver GetChrome() {
+	private static WebDriver getChrome() {
+		String currentDir = System.getProperty("user.dir");
+		//String chromeDriverPath = currentDir + /*File.separator +*/  "\\Framework\\Drivers\\chromedriver.exe";
+		
+		
+		String chromeDriverRelativePath = String.format("%sFramework%sDrivers%schromedriver.exe", File.separator, File.separator, File.separator);	
+		//String path = String.join(currentDir, chromeDriverRelativePath);
+		String path = currentDir + chromeDriverRelativePath;
+		System.setProperty("webdriver.chrome.driver", path);
+		return new ChromeDriver(); 
+	}
+	
+	private static WebDriver getIE() {
 		String currentDir = System.getProperty("user.dir");
 		//String chromeDriverPath = currentDir + /*File.separator +*/  "\\Framework\\Drivers\\chromedriver.exe";
 		

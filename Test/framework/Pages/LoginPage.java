@@ -30,7 +30,8 @@ public class LoginPage extends CPageBase{
 	}
 	
 	public ClsLoginPage goToClsLogin(){
-		getLoginButton().click();
+		getLoginButton().waitForElementToBeVisible();
+		getLoginButton().javaScriptClick();
 		return new ClsLoginPage(getBrowser());
 	}
 

@@ -1,15 +1,21 @@
 package Browsers;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Predicate;
 
 import Controls.CAlertDialog;
 import Controls.CConfirmDialog;
@@ -71,6 +77,11 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 		this.driver = driver;
 	}
 
+	@Override
+	protected WebElement getWebElement() {
+		refreshDocument();
+		return _webElement;
+	}
 
 	public WebDriver getDriver() {
 		return driver;
@@ -123,7 +134,8 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
     {
     	this.driver.navigate().to(url);
     	this.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-    	this.refreshDocument();
+    	waitForComplete(); 
+        this.refreshDocument();
     }
 
     public void back()
@@ -141,8 +153,57 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
         this.driver.navigate().refresh();
     }
 	
-	public void close(){
-		this.driver.close();
+	public void close() {
+		try{
+			Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+			Runtime.getRuntime().exec("taskkill /F /IM iexplorer.exe");
+		}
+		catch (Exception e){
+		}
+
+		detacheFrame();
+		this.driver.quit();
+
+	}
+	
+	public void waitForComplete() {
+		try{
+			waitForComplete(30);
+		}
+		catch(Exception e){
+		}
+	}
+	
+	public void waitForComplete(int timeout) throws Exception{
+		/*
+        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+        JavascriptExecutor javascript = (JavascriptExecutor) getDriver();  
+        if (javascript == null)
+        {
+            throw new Exception("Driver must support javascript execution");
+        }
+        */
+    	new FluentWait<WebDriver>(getDriver()).
+        withTimeout(3, TimeUnit.SECONDS).
+        pollingEvery(50, TimeUnit.MILLISECONDS).
+        ignoring(NoSuchElementException.class).
+        	until(new Predicate<WebDriver>() {
+				@Override
+				public boolean apply(WebDriver driver) {
+			        JavascriptExecutor javascript = (JavascriptExecutor) getDriver();  
+			        if (javascript == null)
+			        {
+			            try {
+							throw new Exception("Driver must support javascript execution");
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			        }
+					String readyState = javascript.executeScript("if (document.readyState) return document.readyState;").toString();
+                    return readyState == "complete";
+				}
+		});
 	}
 	
 	public HtmlElementBase getDocument()
@@ -155,5 +216,14 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 		setWebElement(driver.findElement(By.xpath("/*")));
 	}
 
+    public void attachToFrame(String frameId) {
+    	getDriver().switchTo().frame(frameId);
+    	refreshDocument();
+    }
+    
+    public void detacheFrame() {
+    	getDriver().switchTo().defaultContent();
+    	refreshDocument();
+    }
 	
 }

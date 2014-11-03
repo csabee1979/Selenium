@@ -169,6 +169,16 @@ public class HtmlElementBase {
             _action.contextClick(_webElement).perform();
         }
     }
+    
+    public void javaScriptClick() {
+        StringBuilder script = new StringBuilder();
+        script.append("var evt = document.createEvent('MouseEvents');");
+        script.append(String.format("evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);"));
+        script.append("arguments[0].dispatchEvent(evt);");
+        
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();  
+        javascriptExecutor.executeScript(script.toString(), getCurrentWebElement());
+    }
 
     public void dragAndDrop(final HtmlElementBase sourceElement) {
     	_action.dragAndDrop(sourceElement._webElement, this._webElement).perform();
@@ -272,31 +282,27 @@ public class HtmlElementBase {
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
-
-    public void attachToFrame(String frameId) {
-    	getDriver().switchTo().frame(frameId);
-    }
-    
-    public void detacheFrame() {
-    	getDriver().switchTo().defaultContent();
-    }
     
     public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés       
     	try {
+    		for (int i = 0; i < 10; i++) {
+    			try {
+    				Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
+    				return constructor.newInstance( getWebElement().findElement(byConstraint), getDriver(), byConstraint);
+    			}
+    			catch (Exception e) {
+    				Thread.sleep(1000);
+    			}
+    		}
+    		
 	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-	    	return constructor.newInstance( _webElement.findElement(byConstraint), getDriver(), byConstraint);
+	    	return constructor.newInstance( getWebElement().findElement(byConstraint), getDriver(), byConstraint);
+
     	}
-    	catch (NoSuchMethodException e) {
+    	catch (Exception e) {
+    		System.err.println("Element not find: " + byConstraint.toString());
+    		e.printStackTrace();
     		throw new RuntimeException(e);
-    	} 
-        catch (InstantiationException e){
-          throw new RuntimeException(e);
-        }
-        catch (IllegalAccessException e) {
-          throw new RuntimeException(e);
-        }
-        catch (InvocationTargetException e){
-          throw new RuntimeException(e);
         }
     }
     

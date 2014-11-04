@@ -12,25 +12,25 @@ public class CentralPage  extends CPageBase {
 	}
 	
 	private LeftNavControl _leftNavControl;
+	
+	private LeftNavControl getLeftNavControl(){
+		return new LeftNavControl(getBrowser());
+	}
 
 	public DeploymentPage goToDeployment(){
-		if (_leftNavControl == null){
-			_leftNavControl = new LeftNavControl(getBrowser());
-		}
-		
-		return _leftNavControl.goToDeploymentPage();
+		return getLeftNavControl().goToDeploymentPage();
 	}
 	
-	@Override
-	public boolean getDisplayed() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 	@Override
 	protected FrameIdProvider getIdProvider() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected boolean until() {
+		// TODO Auto-generated method stub
+		return getLeftNavControl().isDeploymentLinkDisplayed();
 	}
 
 }

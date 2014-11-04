@@ -223,30 +223,7 @@ public class HtmlElementBase {
     		_action.release(getWebElement()).perform();
     	}
     }
-    /*   
-    public HtmlInput getWebInput(final By byConstraint){
-    	return new HtmlInput(getWebElement().findElement(byConstraint), _driver);
-    }
 
-    public List<HtmlInput> getWebInputs(){
-    	final String elementName = "input[type='text']";
-    	final List<HtmlInput> inputList = new ArrayList<HtmlInput>(); 
-    	final List<WebElement> elementList = _webElement.findElements(By.cssSelector(elementName));
-    	
-    	for (final WebElement element: elementList){
-    		inputList.add(new HtmlInput(element, _driver));
-    	}
-    	
-    	return inputList;
-    	
-    	//return new CWebInput(getWebElement().findElement(byConstraint), _driver);
-    }
-    */
-    /*
-    public HtmlButton getWebButton(final By byConstraint){
-    	return new HtmlButton(getWebElement().findElement(byConstraint), _driver);
-    }
-*/
     public List<HtmlButton> getWebButtons(){
     	final String elementName = "button";
     	final List<HtmlButton> buttonList = new ArrayList<HtmlButton>(); 
@@ -256,33 +233,31 @@ public class HtmlElementBase {
     		buttonList.add(new HtmlButton(element, _driver, By.cssSelector(elementName)));
     	}
     	
-    	return buttonList;
-    	
-    	//return new CWebInput(getWebElement().findElement(byConstraint), _driver);
+    	return buttonList;   	
     }
     
-    /*
+/*
     public HtmlSelect getWebSelect(final By byConstraint){
     	return new HtmlSelect(getWebElement().findElement(byConstraint), _driver);
     }
-
+*/
     public List<HtmlSelect> getWebSelects(){
     	final String elementName = "select";
     	final List<HtmlSelect> selectList = new ArrayList<HtmlSelect>(); 
     	final List<WebElement> elementList = _webElement.findElements(By.cssSelector(elementName));
     	
     	for (final WebElement element: elementList){
-    		selectList.add(new HtmlSelect(element, _driver));
+    		selectList.add(new HtmlSelect(element, _driver, By.cssSelector(elementName)));
     	}
     	
     	return selectList;   	
     }
-    */
+
     
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
-    
+        
     public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés       
     	try {
     		for (int i = 0; i < 10; i++) {
@@ -313,7 +288,7 @@ public class HtmlElementBase {
     public String getElementName(){
     	return "";
     }
-    
+        
     public void waitForElementToBeVisible() {
     	new FluentWait<WebDriver>(getDriver()).
                 withTimeout(3, TimeUnit.SECONDS).

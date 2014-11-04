@@ -12,7 +12,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class CBrowserFactory {
 	static public CWebBrowser GetBrowser() throws InterruptedException{	
 		WebDriver driver = getIE();
-		Thread.sleep(3000);
 		return new CWebBrowser(driver);
 	}
 	

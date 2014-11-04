@@ -14,11 +14,6 @@ public class LeftNavControl extends CControlBase {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public boolean getDisplayed() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 	
 	private HtmlLink getDeploymentLink() {
 		return  getMainWindow().getDocument().getElement(HtmlLink.class, By.id("deployment"));
@@ -28,7 +23,12 @@ public class LeftNavControl extends CControlBase {
 		getDeploymentLink().click();
 		return new DeploymentPage(getBrowser());
 	}
-
+	
+	public boolean isDeploymentLinkDisplayed() {
+		getBrowser().refreshDocument();
+		return getDeploymentLink().isDisplayed();
+	}
+	
 	@Override
 	protected FrameIdProvider getIdProvider() {
 		// TODO Auto-generated method stub

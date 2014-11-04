@@ -11,6 +11,9 @@ public class TestLogin extends CTestBase {
 	public void login () throws Exception{
 		browser.goTo("https://secure.logmein.com/");
 		LoginPage loginPage = new LoginPage(browser);
-		loginPage.goToClsLogin().login(DefaultConfigurationSettings.getDefaultEmail(), DefaultConfigurationSettings.getDefaultPassword());
+		loginPage.WaitForComplete();
+		ClsLoginPage clsLogin = loginPage.goToClsLogin();
+		clsLogin.WaitForComplete();
+		clsLogin.login(DefaultConfigurationSettings.getDefaultEmail(), DefaultConfigurationSettings.getDefaultPassword());
 	}
 }

@@ -28,13 +28,14 @@ public class DeploymentPage extends CPageBase {
 		return getFrame().getDocument().getElement(HtmlButton.class, By.cssSelector("#toolbar > div > a"));
 	}
 
-	@Override
-	public boolean getDisplayed() {
-		// TODO Auto-generated method stub
-		return AddInstallationPackage().isDisplayed();
-	}
-
 	public void goToNewDeploymentPackage() {
 		AddInstallationPackage().click();	
+	}
+
+	@Override
+	protected boolean until() {
+		// TODO Auto-generated method stub
+		getBrowser().refreshDocument();
+		return AddInstallationPackage().isDisplayed();
 	}
 }

@@ -16,12 +16,14 @@ abstract public class CControlBase {
 
 	protected CWebBrowser getMainWindow(){
 		_browser.detacheFrame();
+		_browser.refreshDocument();
 		return _browser;
 	}
 	
 	protected CWebBrowser getFrame(){
 		_browser.detacheFrame();
 		_browser.attachToFrame(getIdProvider().getFrameId());
+		_browser.refreshDocument();
 		return _browser;
 	}
 	
@@ -29,5 +31,4 @@ abstract public class CControlBase {
 		return _browser;
 	}
 	
-	public abstract boolean getDisplayed();
 }

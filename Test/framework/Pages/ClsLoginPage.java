@@ -34,20 +34,15 @@ public class ClsLoginPage extends CPageBase {
 	}
 	
 	@Override
-	public boolean getDisplayed() {
-		try {
-			getLoginButton().waitForElementToBeVisible();
-			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}	
-	}
-
-	@Override
 	protected FrameIdProvider getIdProvider() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected boolean until() {
+		// TODO Auto-generated method stub
+		return getLoginButton().isDisplayed();
 	}	
 
 }

@@ -24,16 +24,16 @@ public class CLocalhostIndexPage extends CPageBase{
 	}
 
 	@Override
-	public boolean getDisplayed() {
+	protected FrameIdProvider getIdProvider() {
 		// TODO Auto-generated method stub
-		return true;
+		return null;
 	}
 
 
 	@Override
-	protected FrameIdProvider getIdProvider() {
+	protected boolean until() {
 		// TODO Auto-generated method stub
-		return null;
+		return true;
 	}
 
 }

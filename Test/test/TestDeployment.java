@@ -12,10 +12,12 @@ public class TestDeployment extends CTestBase {
 	public void checkDeploymentpage () throws Exception{
 		browser.goTo("https://secure.logmein.com/");
 		LoginPage loginPage = new LoginPage(browser);
+		loginPage.WaitForComplete();
 		loginPage.goToClsLogin().login(DefaultConfigurationSettings.getDefaultEmail(), DefaultConfigurationSettings.getDefaultPassword());
 		CentralPage centralPage = new CentralPage(browser);
+		centralPage.WaitForComplete();
 		DeploymentPage deploymentPage = centralPage.goToDeployment();
-		Assert.assertTrue(deploymentPage.getDisplayed());
+		deploymentPage.WaitForComplete();
 		deploymentPage.goToNewDeploymentPackage();
 	}
 }

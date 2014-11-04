@@ -14,16 +14,6 @@ public class LoginPage extends CPageBase{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean getDisplayed() {
-		try {
-			getLoginButton().waitForElementToBeVisible();
-			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}	
-	}
 	
 	private HtmlButton getLoginButton(){
 		return getMainWindow().getDocument().getElement(HtmlButton.class, By.className("btn-login"));
@@ -39,5 +29,12 @@ public class LoginPage extends CPageBase{
 	protected FrameIdProvider getIdProvider() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected boolean until() {
+		// TODO Auto-generated method stub
+		getBrowser().refreshDocument();
+		return getLoginButton().isDisplayed();
 	}
 }

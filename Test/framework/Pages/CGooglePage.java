@@ -44,14 +44,14 @@ public class CGooglePage extends CPageBase {
 	}
 
 	@Override
-	public boolean getDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	protected FrameIdProvider getIdProvider() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected boolean until() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

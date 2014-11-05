@@ -7,6 +7,7 @@ import Controls.HtmlButton;
 import Controls.HtmlInput;
 import PageObjectBase.CPageBase;
 import PageObjectBase.FrameIdProvider;
+import PageObjectBase.PageLoader;
 
 public class ClsLoginPage extends CPageBase {
 
@@ -26,11 +27,12 @@ public class ClsLoginPage extends CPageBase {
 		return getMainWindow().getDocument().getElement(HtmlButton.class, By.id("btnSubmit"));
 	}
 
-	public void login(String email, String password){
+	public CentralPage login(String email, String password){
 		getLoginButton().waitForElementToBeVisible();
 		getEmail().TypeText(email);
 		getPassword().TypeText(password);
 		getLoginButton().click();
+		return PageLoader.loadPage(CentralPage.class, getBrowser());
 	}
 	
 	@Override

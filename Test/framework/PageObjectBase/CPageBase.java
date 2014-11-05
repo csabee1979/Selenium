@@ -23,16 +23,16 @@ abstract public class CPageBase extends CControlBase {
 	    long end = start + timeoutInMilliseconds;
 	    while (System.currentTimeMillis() < end)
 	    {
-	      boolean contition = false;
+	      boolean condition = false;
 	      
 	      try {
-	    	  contition = until();
+	    	  condition = until();
 	      }
 	      catch(Exception e){
 	      }
 	      
 	      
-	      if (contition) {
+	      if (condition) {
 	        return;
 	      }
 	      try

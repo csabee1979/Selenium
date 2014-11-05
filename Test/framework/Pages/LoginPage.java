@@ -6,6 +6,7 @@ import Browsers.CWebBrowser;
 import Controls.HtmlButton;
 import PageObjectBase.CPageBase;
 import PageObjectBase.FrameIdProvider;
+import PageObjectBase.PageLoader;
 
 public class LoginPage extends CPageBase{
 
@@ -22,7 +23,7 @@ public class LoginPage extends CPageBase{
 	public ClsLoginPage goToClsLogin(){
 		getLoginButton().waitForElementToBeVisible();
 		getLoginButton().javaScriptClick();
-		return new ClsLoginPage(getBrowser());
+		return PageLoader.loadPage(ClsLoginPage.class, getBrowser());
 	}
 
 	@Override

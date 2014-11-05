@@ -11,8 +11,7 @@ public class CentralPage  extends CPageBase {
 		// TODO Auto-generated constructor stub
 	}
 	
-	private LeftNavControl _leftNavControl;
-	
+
 	private LeftNavControl getLeftNavControl(){
 		return new LeftNavControl(getBrowser());
 	}

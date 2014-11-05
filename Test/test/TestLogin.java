@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import Browsers.CWebBrowser;
 import Configuration.DefaultConfigurationSettings;
+import PageObjectBase.PageLoader;
 import Pages.ClsLoginPage;
 import Pages.LoginPage;
 
@@ -10,10 +11,7 @@ public class TestLogin extends CTestBase {
 	@Test
 	public void login () throws Exception{
 		browser.goTo("https://secure.logmein.com/");
-		LoginPage loginPage = new LoginPage(browser);
-		loginPage.WaitForComplete();
-		ClsLoginPage clsLogin = loginPage.goToClsLogin();
-		clsLogin.WaitForComplete();
-		clsLogin.login(DefaultConfigurationSettings.getDefaultEmail(), DefaultConfigurationSettings.getDefaultPassword());
+		LoginPage loginPage = PageLoader.loadPage(LoginPage.class, browser);
+		loginPage.goToClsLogin().login(DefaultConfigurationSettings.getDefaultEmail(), DefaultConfigurationSettings.getDefaultPassword());
 	}
 }

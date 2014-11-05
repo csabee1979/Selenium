@@ -6,6 +6,7 @@ import Browsers.CWebBrowser;
 import Controls.HtmlLink;
 import PageObjectBase.CControlBase;
 import PageObjectBase.FrameIdProvider;
+import PageObjectBase.PageLoader;
 
 public class LeftNavControl extends CControlBase {
 
@@ -21,7 +22,7 @@ public class LeftNavControl extends CControlBase {
 	
 	public DeploymentPage goToDeploymentPage(){
 		getDeploymentLink().click();
-		return new DeploymentPage(getBrowser());
+		return PageLoader.loadPage(DeploymentPage.class, getBrowser());
 	}
 	
 	public boolean isDeploymentLinkDisplayed() {

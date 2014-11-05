@@ -1,5 +1,6 @@
 package Controls;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
@@ -257,30 +258,26 @@ public class HtmlElementBase {
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
-        
-    public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés       
-    	try {
-    		for (int i = 0; i < 10; i++) {
-    			try {
-    				Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-    				return constructor.newInstance( getWebElement().findElement(byConstraint), getDriver(), byConstraint);
-    			}
-    			catch (Exception e) {
-    				Thread.sleep(1000);
-    			}
-    		}
-    		
-	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-	    	return constructor.newInstance( getWebElement().findElement(byConstraint), getDriver(), byConstraint);
-
+    
+    
+    public <T extends HtmlElementBase> List<T> getElements(Class<T> element, final By byConstraint) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException  { //Todo: elegánsabb hiba kezelés   	
+    	System.out.println(element.getName());
+    	
+    	List<WebElement> webElementList = getWebElement().findElements(byConstraint);
+    	List<T> htmlElementList = new ArrayList<T>();
+    	
+    	for (WebElement webElement : webElementList){
+    		htmlElementList.add(getElementWithWait(element, webElement, byConstraint));
     	}
-    	catch (Exception e) {
-    		System.err.println("Element not find: " + byConstraint.toString());
-    		e.printStackTrace();
-    		throw new RuntimeException(e);
-        }
+    	
+    	return htmlElementList;
     }
     
+    public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
+    	System.out.println(element.getName());
+    	return getElementWithWait(element, getWebElement().findElement(byConstraint) ,byConstraint);
+    }
+   
     public WebElement getCurrentWebElement() {
     	return getWebElement();
     }
@@ -311,4 +308,27 @@ public class HtmlElementBase {
     	   });
 
     }
+    
+	private <T extends HtmlElementBase> T getElementWithWait(Class<T> element, WebElement webElement, final By byConstraint) {
+		try {
+    		for (int i = 0; i < 10; i++) {
+    			try {
+    				Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
+    				return constructor.newInstance( webElement, getDriver(), byConstraint);
+    			}
+    			catch (Exception e) {
+    				Thread.sleep(1000);
+    			}
+    		}
+    		
+	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
+	    	return constructor.newInstance( webElement, getDriver(), byConstraint);
+
+    	}
+    	catch (Exception e) {
+    		System.err.println("Element not find: " + byConstraint.toString());
+    		e.printStackTrace();
+    		throw new RuntimeException(e);
+        }
+	}
 }

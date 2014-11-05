@@ -34,14 +34,14 @@ public class CBrowserFactory {
 	private static WebDriver getIE() {
 		String currentDir = System.getProperty("user.dir");
 		String ieDriverRelativePath;
-		/*
+
 		if (is64Bit()){
 			ieDriverRelativePath = String.format("%sFramework%sDrivers%sx64%sIEDriverServer.exe", File.separator, File.separator, File.separator, File.separator);
 		}
 		else {
 			ieDriverRelativePath = String.format("%sFramework%sDrivers%sIEDriverServer.exe", File.separator, File.separator, File.separator);
 		}
-		*/
+		
 		ieDriverRelativePath = String.format("%sFramework%sDrivers%sIEDriverServer.exe", File.separator, File.separator, File.separator);
         DesiredCapabilities capab = DesiredCapabilities.internetExplorer();
         capab.setCapability(

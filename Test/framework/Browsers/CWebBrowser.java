@@ -12,10 +12,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Predicate;
+import com.thoughtworks.selenium.Wait;
 
 import Controls.CAlertDialog;
 import Controls.CConfirmDialog;
@@ -154,16 +156,15 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
     }
 	
 	public void close() {
+		detacheFrame();
+		this.driver.quit();
+		
 		try{
 			Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
 			Runtime.getRuntime().exec("taskkill /F /IM iexplorer.exe");
 		}
 		catch (Exception e){
 		}
-
-		detacheFrame();
-		this.driver.quit();
-
 	}
 	
 	public void waitForComplete() {
@@ -175,16 +176,9 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 	}
 	
 	public void waitForComplete(int timeout) throws Exception{
-		/*
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
-        JavascriptExecutor javascript = (JavascriptExecutor) getDriver();  
-        if (javascript == null)
-        {
-            throw new Exception("Driver must support javascript execution");
-        }
-        */
+
     	new FluentWait<WebDriver>(getDriver()).
-        withTimeout(3, TimeUnit.SECONDS).
+        withTimeout(timeout, TimeUnit.SECONDS).
         pollingEvery(50, TimeUnit.MILLISECONDS).
         ignoring(NoSuchElementException.class).
         	until(new Predicate<WebDriver>() {
@@ -201,9 +195,12 @@ public class CWebBrowser extends HtmlElementBase implements WebBrowser {
 						}
 			        }
 					String readyState = javascript.executeScript("if (document.readyState) return document.readyState;").toString();
-                    return readyState == "complete";
+					System.out.println(readyState);
+					
+                    return readyState != "complete";
 				}
 		});
+	
 	}
 	
 	public HtmlElementBase getDocument()

@@ -6,7 +6,7 @@ import Browsers.CWebBrowser;
 
 public class PageLoader {
 	public static <T extends CPageBase> T loadPage(Class<T> page, final CWebBrowser browser) {
-		try{
+		try {
 			Constructor<T> constructor = page.getConstructor(CWebBrowser.class);
 	    	T newPage = constructor.newInstance(browser);
 	    	newPage.WaitForComplete();

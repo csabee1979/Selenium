@@ -10,7 +10,7 @@ import Browsers.CWebBrowser;
 import Controls.HtmlElementBase;
 
 abstract public class CPageBase extends CControlBase {
-	private final int timeoutInMilliseconds = 60000;
+	private final int timeoutInMilliseconds = 100000;
 	
 	public CPageBase(CWebBrowser browser){
 		super(browser);

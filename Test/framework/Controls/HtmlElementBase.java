@@ -40,6 +40,7 @@ public class HtmlElementBase {
 	private final Actions _action;
 	private final Mouse _mouse;
 	private By _locator;
+	private HtmlControlBuilder _controlBuilder;
 	
 	public HtmlElementBase(final WebElement webElement, final WebDriver driver, By locator) {
 		this.setWebElement(webElement);
@@ -47,6 +48,7 @@ public class HtmlElementBase {
 		_action = new Actions(_driver);
 		_mouse = ((HasInputDevices)_driver).getMouse();
 		_locator = locator;
+		_controlBuilder = new HtmlControlBuilder(webElement, driver);
 	}
 	
 	protected WebElement getWebElement() {
@@ -58,7 +60,7 @@ public class HtmlElementBase {
 	}
 	
 	protected void setWebElement(final WebElement webElement) {
-		this._webElement = webElement;
+		this._webElement = webElement;		
 	}
 	
     public String getId() {
@@ -230,57 +232,6 @@ public class HtmlElementBase {
     	}
     }
     
-    //Todo: extract the element getter to differnt class 
-
-    public List<HtmlButton> getButtons(){
-    	return getAllElements(HtmlButton.class);	    		
-    }
-    
-    public List<HtmlInput> getInputs(){
-    	return getAllElements(HtmlInput.class);	    		
-    }
- 
-    public List<HtmlSelect> getSelects(){
-    	return getAllElements(HtmlSelect.class);	    		
-    }
-    
-    public List<HtmlOption> getOptions(){
-    	return getAllElements(HtmlOption.class);	    		
-    }
-    
-    public List<HtmlLink> getLinks(){
-    	return getAllElements(HtmlLink.class);	    		
-    }
-    
-    public WebElement getWebElement(final By byConstraint){
-        return  _webElement.findElement(byConstraint);   	
-    }
-    
-    public <T extends HtmlElementBase> List<T> getAllElements(Class<T> element) {
-    	String className = element.getName();   	
-        By defaultLocating = WebElementsUtils.getDefaultByConstraint(className);
-    	
-    	return getElements(element, defaultLocating);
-    }
-    
-    public <T extends HtmlElementBase> List<T> getElements(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
-    	System.out.println(element.getName());
-    	
-    	List<WebElement> webElementList = getWebElement().findElements(byConstraint);
-    	List<T> htmlElementList = new ArrayList<T>();
-    	
-    	for (WebElement webElement : webElementList){
-    		htmlElementList.add(getElementWithWait(element, webElement, byConstraint));
-    	}
-    	
-    	return htmlElementList;
-    }
-    
-    public <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
-    	System.out.println(element.getName());
-    	return getElementWithWait(element, getWebElement().findElement(byConstraint) ,byConstraint);
-    }
-   
     public WebElement getCurrentWebElement() {
     	return getWebElement();
     }
@@ -312,26 +263,7 @@ public class HtmlElementBase {
 
     }
     
-	private <T extends HtmlElementBase> T getElementWithWait(Class<T> element, WebElement webElement, final By byConstraint) {
-		try {
-    		for (int i = 0; i < 10; i++) {
-    			try {
-    				Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-    				return constructor.newInstance( webElement, getDriver(), byConstraint);
-    			}
-    			catch (Exception e) {
-    				Thread.sleep(1000);
-    			}
-    		}
-    		
-	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-	    	return constructor.newInstance( webElement, getDriver(), byConstraint);
-
-    	}
-    	catch (Exception e) {
-    		System.err.println("Element not find: " + byConstraint.toString());
-    		e.printStackTrace();
-    		throw new RuntimeException(e);
-        }
-	}
+    public HtmlControlBuilder getControls(){
+    	return _controlBuilder;
+    }
 }

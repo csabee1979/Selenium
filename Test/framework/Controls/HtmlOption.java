@@ -19,7 +19,7 @@ public class HtmlOption extends HtmlElementBase {
     }
 
 	@Override
-	public String getHtmlTag() {
-		return "option";
-	}
+    public By getDefaultByContstraint(){
+    	return By.tagName("option");
+    }
 }

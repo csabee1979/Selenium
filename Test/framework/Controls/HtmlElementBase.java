@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -228,41 +229,39 @@ public class HtmlElementBase {
     		_action.release(getWebElement()).perform();
     	}
     }
+    
+    //Todo: extract the element getter to differnt class 
 
-    public List<HtmlButton> getWebButtons(){
-    	final String elementName = "button";
-    	final List<HtmlButton> buttonList = new ArrayList<HtmlButton>(); 
-    	final List<WebElement> elementList = _webElement.findElements(By.cssSelector(elementName));
-    	
-    	for (final WebElement element: elementList){
-    		buttonList.add(new HtmlButton(element, _driver, By.cssSelector(elementName)));
-    	}
-    	
-    	return buttonList;   	
+    public List<HtmlButton> getButtons(){
+    	return getAllElements(HtmlButton.class);	    		
     }
     
-/*
-    public HtmlSelect getWebSelect(final By byConstraint){
-    	return new HtmlSelect(getWebElement().findElement(byConstraint), _driver);
+    public List<HtmlInput> getInputs(){
+    	return getAllElements(HtmlInput.class);	    		
     }
-*/
-    public List<HtmlSelect> getWebSelects(){
-    	final String elementName = "select";
-    	final List<HtmlSelect> selectList = new ArrayList<HtmlSelect>(); 
-    	final List<WebElement> elementList = _webElement.findElements(By.cssSelector(elementName));
-    	
-    	for (final WebElement element: elementList){
-    		selectList.add(new HtmlSelect(element, _driver, By.cssSelector(elementName)));
-    	}
-    	
-    	return selectList;   	
+ 
+    public List<HtmlSelect> getSelects(){
+    	return getAllElements(HtmlSelect.class);	    		
     }
-
+    
+    public List<HtmlOption> getOptions(){
+    	return getAllElements(HtmlOption.class);	    		
+    }
+    
+    public List<HtmlLink> getLinks(){
+    	return getAllElements(HtmlLink.class);	    		
+    }
     
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
     
+    public <T extends HtmlElementBase> List<T> getAllElements(Class<T> element) {
+    	String className = element.getName();   	
+        By defaultLocating = WebElementsUtils.getDefaultByConstraint(className);
+    	
+    	return getElements(element, defaultLocating);
+    }
     
     public <T extends HtmlElementBase> List<T> getElements(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
     	System.out.println(element.getName());
@@ -286,8 +285,8 @@ public class HtmlElementBase {
     	return getWebElement();
     }
     
-    public String getElementName(){
-    	return "";
+    public By getDefaultByContstraint(){
+    	return By.xpath("/*");
     }
         
     public void waitForElementToBeVisible() {

@@ -14,9 +14,9 @@ public class HtmlLink extends HtmlElementBase {
 	public String getHref() {
 		return getCurrentWebElement().getAttribute("href");
 	}
-
+	
 	@Override
-	public String getHtmlTag() {
-		return "a";
-	}
+    public By getDefaultByContstraint(){
+    	return By.tagName("a");
+    }
 }

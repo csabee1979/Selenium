@@ -24,7 +24,7 @@ public class HtmlInput extends HtmlElementBase {
 	}
 	
 	@Override
-	public String getHtmlTag() {
-		return "input";
-	}
+    public By getDefaultByContstraint(){
+    	return By.tagName("input");
+    }
 }

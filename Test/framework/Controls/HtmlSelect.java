@@ -78,7 +78,7 @@ public class HtmlSelect extends HtmlElementBase {
     }
     
 	@Override
-	public String getHtmlTag() {
-		return "button";
-	}
+    public By getDefaultByContstraint(){
+    	return By.tagName("select");
+    }
 }

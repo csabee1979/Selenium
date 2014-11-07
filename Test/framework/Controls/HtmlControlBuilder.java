@@ -34,7 +34,18 @@ public class HtmlControlBuilder {
 		return _driver;
 	}
 
-	
+    public HtmlBody getBody(final By byLocator) {
+    	return getElement(HtmlBody.class, byLocator);	    		
+    }
+    
+    public HtmlForm getForm(final By byLocator) {
+    	return getElement(HtmlForm.class, byLocator);	    		
+    }
+
+    public HtmlDiv getDiv(final By byLocator) {
+    	return getElement(HtmlDiv.class, byLocator);	    		
+    }
+   
     public HtmlButton getButton(final By byLocator) {
     	return getElement(HtmlButton.class, byLocator);	    		
     }
@@ -51,10 +62,22 @@ public class HtmlControlBuilder {
     	return getElement(HtmlOption.class, byLocator);	    		
     }
     
-    public HtmlLink getLinks(final By byLocator){
+    public HtmlLink getLink(final By byLocator){
     	return getElement(HtmlLink.class, byLocator);	    		
     }
 	
+    public List<HtmlBody> getBodys(){
+    	return getAllElements(HtmlBody.class);	    		
+    }
+    
+    public List<HtmlForm> getForms(){
+    	return getAllElements(HtmlForm.class);	    		
+    }
+    
+    public List<HtmlDiv> getDivs(){
+    	return getAllElements(HtmlDiv.class);	    		
+    }
+    
     public List<HtmlButton> getButtons(){
     	return getAllElements(HtmlButton.class);	    		
     }

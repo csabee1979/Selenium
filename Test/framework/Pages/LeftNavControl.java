@@ -17,7 +17,7 @@ public class LeftNavControl extends CControlBase {
 	
 	
 	private HtmlLink getDeploymentLink() {
-		return  getMainWindow().getDocument().getControls().getLinks(By.id("deployment"));
+		return  getMainWindow().getDocument().getControls().getLink(By.id("deployment"));
 	}
 	
 	public DeploymentPage goToDeploymentPage(){

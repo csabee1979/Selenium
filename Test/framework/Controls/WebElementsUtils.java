@@ -12,6 +12,8 @@ public class WebElementsUtils {
 	
 	public static By getDefaultByConstraint(String elementClassName) {
 		switch (elementClassName){
+			case "Controls.HtmlBody" : return By.tagName("body");
+			case "Controls.HtmlForm" : return By.tagName("form");
 			case "Controls.HtmlInput" : return By.tagName("input"); 
 			case "Controls.HtmlButton" : return By.tagName("button");
 			case "Controls.HtmlLink" : return By.tagName("a");

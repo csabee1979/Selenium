@@ -76,9 +76,4 @@ public class HtmlSelect extends HtmlElementBase {
     	
     	return webOptions;
     }
-    
-	@Override
-    public By getDefaultByContstraint(){
-    	return By.tagName("select");
-    }
 }

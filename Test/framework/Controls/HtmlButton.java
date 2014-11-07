@@ -22,9 +22,4 @@ public class HtmlButton extends HtmlElementBase {
 		
 		return value;
 	}
-	
-	@Override
-    public By getDefaultByContstraint(){
-    	return By.tagName("button");
-    }
 }

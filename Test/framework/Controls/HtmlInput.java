@@ -22,9 +22,4 @@ public class HtmlInput extends HtmlElementBase {
 	public void TypeText(String text){
 		_webElement.sendKeys(text);
 	}
-	
-	@Override
-    public By getDefaultByContstraint(){
-    	return By.tagName("input");
-    }
 }

@@ -18,8 +18,4 @@ public class HtmlOption extends HtmlElementBase {
         }
     }
 
-	@Override
-    public By getDefaultByContstraint(){
-    	return By.tagName("option");
-    }
 }

@@ -146,10 +146,6 @@ public class HtmlElementBase {
     	return this._driver;
     }
     
-    public String getHtmlTag() {
-    	return "";
-    }
-    
     public void setAttribute(final String attributeName, final String attributeValue) {
         if (_driver != null) {
         	((JavascriptExecutor )this._driver).executeScript("arguments[0].setAttribute('" + attributeName + "',arguments[1]);", this._webElement, attributeValue);
@@ -234,10 +230,6 @@ public class HtmlElementBase {
     
     public WebElement getCurrentWebElement() {
     	return getWebElement();
-    }
-    
-    public By getDefaultByContstraint(){
-    	return By.xpath("/*");
     }
         
     public void waitForElementToBeVisible() {

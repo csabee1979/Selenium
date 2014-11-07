@@ -53,6 +53,10 @@ public class HtmlControlBuilder {
 	public HtmlInput getInput(final By byLocator){
 		return getElement(HtmlInput.class, byLocator);	    		
 	}
+	
+	public HtmlImage getImage(final By byLocator){
+		return getElement(HtmlImage.class, byLocator);	    		
+	}
 	 
     public HtmlSelect getSelect(final By byLocator){
     	return getElement(HtmlSelect.class, byLocator);	    		
@@ -66,6 +70,10 @@ public class HtmlControlBuilder {
     	return getElement(HtmlLink.class, byLocator);	    		
     }
 	
+    public HtmlCheckBox getCheckBox(final By byLocator){
+    	return getElement(HtmlCheckBox.class, byLocator);	    		
+    }
+    
     public List<HtmlBody> getBodys(){
     	return getAllElements(HtmlBody.class);	    		
     }
@@ -85,7 +93,11 @@ public class HtmlControlBuilder {
 	public List<HtmlInput> getInputs(){
 		return getAllElements(HtmlInput.class);	    		
 	}
-	 
+	
+	public List<HtmlImage> getImages(){
+		return getAllElements(HtmlImage.class);	    		
+	}
+	
     public List<HtmlSelect> getSelects(){
     	return getAllElements(HtmlSelect.class);	    		
     }
@@ -96,6 +108,10 @@ public class HtmlControlBuilder {
     
     public List<HtmlLink> getLinks(){
     	return getAllElements(HtmlLink.class);	    		
+    }
+    
+    public List<HtmlCheckBox> getCheckBoxes(){
+    	return getAllElements(HtmlCheckBox.class);	    		
     }
     
     public WebElement getWebElement(final By byConstraint){

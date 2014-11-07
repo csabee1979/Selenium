@@ -21,6 +21,7 @@ public class WebElementsUtils {
 			case "Controls.HtmlOption" : return By.tagName("option");
 			case "Controls.HtmlSelect" : return By.tagName("select");
 			case "Controls.HtmlDiv" : return By.tagName("div");
+			case "Controls.HtmlImage" : return By.tagName("img");
 
 		default:
 			throw new RuntimeException("Unknown element!");

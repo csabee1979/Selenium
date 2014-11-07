@@ -76,4 +76,9 @@ public class HtmlSelect extends HtmlElementBase {
     	
     	return webOptions;
     }
+    
+	@Override
+	public String getHtmlTag() {
+		return "button";
+	}
 }

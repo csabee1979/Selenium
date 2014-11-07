@@ -143,6 +143,10 @@ public class HtmlElementBase {
     	return this._driver;
     }
     
+    public String getHtmlTag() {
+    	return "";
+    }
+    
     public void setAttribute(final String attributeName, final String attributeValue) {
         if (_driver != null) {
         	((JavascriptExecutor )this._driver).executeScript("arguments[0].setAttribute('" + attributeName + "',arguments[1]);", this._webElement, attributeValue);
@@ -260,7 +264,7 @@ public class HtmlElementBase {
     }
     
     
-    public <T extends HtmlElementBase> List<T> getElements(Class<T> element, final By byConstraint) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException  { //Todo: elegánsabb hiba kezelés   	
+    public <T extends HtmlElementBase> List<T> getElements(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
     	System.out.println(element.getName());
     	
     	List<WebElement> webElementList = getWebElement().findElements(byConstraint);

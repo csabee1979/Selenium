@@ -18,4 +18,8 @@ public class HtmlOption extends HtmlElementBase {
         }
     }
 
+	@Override
+	public String getHtmlTag() {
+		return "option";
+	}
 }

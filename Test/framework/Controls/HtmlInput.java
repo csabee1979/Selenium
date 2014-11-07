@@ -22,4 +22,9 @@ public class HtmlInput extends HtmlElementBase {
 	public void TypeText(String text){
 		_webElement.sendKeys(text);
 	}
+	
+	@Override
+	public String getHtmlTag() {
+		return "input";
+	}
 }

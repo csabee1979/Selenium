@@ -22,4 +22,9 @@ public class HtmlButton extends HtmlElementBase {
 		
 		return value;
 	}
+	
+	@Override
+	public String getHtmlTag() {
+		return "button";
+	}
 }

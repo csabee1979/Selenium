@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import Browsers.CWebBrowser;
 import Controls.HtmlButton;
+
 import PageObjectBase.CPageBase;
 import PageObjectBase.FrameIdProvider;
 import PageObjectBase.PageLoader;
@@ -17,9 +18,9 @@ public class LoginPage extends CPageBase{
 
 	
 	private HtmlButton getLoginButton(){
-		return getMainWindow().getDocument().getElement(HtmlButton.class, By.className("btn-login"));
+		return getMainWindow().getDocument().getControls().getButton(By.className("btn-login"));	
 	}
-	
+	;
 	public ClsLoginPage goToClsLogin(){
 		getLoginButton().waitForElementToBeVisible();
 		getLoginButton().javaScriptClick();

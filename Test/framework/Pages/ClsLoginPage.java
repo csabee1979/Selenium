@@ -16,15 +16,15 @@ public class ClsLoginPage extends CPageBase {
 	}
 
 	private HtmlInput getEmail() {
-		return getMainWindow().getDocument().getElement(HtmlInput.class, By.id("email"));
+		return getMainWindow().getDocument().getControls().getInput(By.id("email"));
 	}
 
 	private HtmlInput getPassword() {
-		return getMainWindow().getDocument().getElement(HtmlInput.class, By.id("password"));
+		return getMainWindow().getDocument().getControls().getInput(By.id("password"));
 	}
 
 	private HtmlButton getLoginButton() {
-		return getMainWindow().getDocument().getElement(HtmlButton.class, By.id("btnSubmit"));
+		return getMainWindow().getDocument().getControls().getButton(By.id("btnSubmit"));
 	}
 
 	public CentralPage login(String email, String password){

@@ -25,7 +25,7 @@ public class DeploymentPage extends CPageBase {
 	}
 	
 	private HtmlButton AddInstallationPackage(){
-		return getFrame().getDocument().getElement(HtmlButton.class, By.cssSelector("#toolbar > div > a"));
+		return getFrame().getDocument().getControls().getButton(By.cssSelector("#toolbar > div > a"));
 	}
 
 	public void goToNewDeploymentPackage() {

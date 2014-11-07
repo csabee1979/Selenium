@@ -20,7 +20,7 @@ public class CLocalhostIndexPage extends CPageBase{
 	}
 
 	private HtmlSelect getSelect() {
-		return getMainWindow().getElement(HtmlSelect.class, By.tagName("select"));
+		return getMainWindow().getControls().getSelect(By.tagName("select"));
 	}
 
 	@Override

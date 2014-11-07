@@ -30,17 +30,17 @@ public class CGooglePage extends CPageBase {
 	
 	private HtmlElementBase getSearchButton() {
 		// TODO Auto-generated method stub
-		return getMainWindow().getDocument().getElement(HtmlButton.class, By.name("btnG"));
+		return getMainWindow().getDocument().getControls().getButton(By.name("btnG"));
 	}
 
 	private HtmlInput getSearchBox() {
 		// TODO Auto-generated method stub
-		return getMainWindow().getDocument().getElement(HtmlInput.class, By.name("q"));
+		return getMainWindow().getDocument().getControls().getInput(By.name("q"));
 	}
 	
 	private HtmlInput getFakeBox() {
 		// TODO Auto-generated method stub
-		return getMainWindow().getDocument().getElement(HtmlInput.class, By.name("aaaaa"));
+		return getMainWindow().getDocument().getControls().getInput(By.name("aaaaa"));
 	}
 
 	@Override

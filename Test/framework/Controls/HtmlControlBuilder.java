@@ -121,7 +121,7 @@ public class HtmlControlBuilder {
 
     private <T extends HtmlElementBase> List<T> getAllElements(Class<T> element) {
     	String className = element.getName();   	
-        By defaultLocating = WebElementsUtils.getDefaultByConstraint(className);
+        By defaultLocating = WebElementsUtils.getDefaultLocator(className);
     	
     	return getElements(element, defaultLocating);
     }
@@ -162,9 +162,9 @@ public class HtmlControlBuilder {
 	    	}
 	    	catch (Exception e) {
 	    		System.err.println("Element not find: " + byConstraint.toString());
-			e.printStackTrace();
-			throw new RuntimeException(e);
-	    }
+	    		e.printStackTrace();
+	    		throw new RuntimeException(e);
+	        }
 	}
 
 }

@@ -11,7 +11,7 @@ import Pages.LoginPage;
 public class TestDeployment extends CTestBase {
 	@Test
 	public void checkDeploymentpage () throws Exception{
-		browser.goTo("https://secure.logmein.com/");
+		browser.goTo(DefaultConfigurationSettings.getDefaultUrl());
 		LoginPage loginPage = PageLoader.loadPage(LoginPage.class, browser);
 		CentralPage centralPage = loginPage.goToClsLogin().login(DefaultConfigurationSettings.getDefaultEmail(), DefaultConfigurationSettings.getDefaultPassword()); 
 		centralPage.goToDeployment().goToNewDeploymentPackage();

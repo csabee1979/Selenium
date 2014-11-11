@@ -18,6 +18,7 @@ public class WebElementsUtils {
 			case "Controls.HtmlInput" : return By.tagName("input"); 
 			case "Controls.HtmlButton" : return By.tagName("button");
 			case "Controls.HtmlCheckBox" : return By.cssSelector("input[type='checkbox']");
+			case "Controls.HtmlRadioButton" : return By.cssSelector("input[type='radio']");
 			case "Controls.HtmlLink" : return By.tagName("a");
 			case "Controls.HtmlOption" : return By.tagName("option");
 			case "Controls.HtmlSelect" : return By.tagName("select");

@@ -74,6 +74,11 @@ public class HtmlControlBuilder {
     	return getElement(HtmlCheckBox.class, byLocator);	    		
     }
     
+    public HtmlRadioButton getRadioButton(final By byLocator){
+    	return getElement(HtmlRadioButton.class, byLocator);	    		
+    }
+    
+    
     public List<HtmlBody> getBodys(){
     	return getAllElements(HtmlBody.class);	    		
     }
@@ -112,6 +117,10 @@ public class HtmlControlBuilder {
     
     public List<HtmlCheckBox> getCheckBoxes(){
     	return getAllElements(HtmlCheckBox.class);	    		
+    }
+    
+    public List<HtmlRadioButton> getRadioButtons(){
+    	return getAllElements(HtmlRadioButton.class);	    		
     }
     
     public WebElement getWebElement(final By byConstraint){

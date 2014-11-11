@@ -12,13 +12,13 @@ public class HtmlCheckBox extends HtmlElementBase{
 	}
 
 	public boolean getChecked(){
-		return getWebElement().getAttribute("").toLowerCase() == "true";
+		return getWebElement().getAttribute("CHECKED") == "true";
 	}
-	
 	public void setChecked(){
 		
 		if (!getChecked()){
 			click();
 		}
 	}
+
 }

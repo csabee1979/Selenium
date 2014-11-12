@@ -98,6 +98,10 @@ public class HtmlControlBuilder {
     	return getElement(HtmlTableHeaderCell.class, byLocator);	    		
     }
     
+    public HtmlTextArea getTextArea(final By byLocator){
+    	return getElement(HtmlTextArea.class, byLocator);
+    }
+    
     public List<HtmlBody> getBodys(){
     	return getAllElements(HtmlBody.class);	    		
     }
@@ -162,6 +166,10 @@ public class HtmlControlBuilder {
     	return getAllElements(HtmlTableHeaderCell.class);	    		
     }
     
+    public List<HtmlTextArea> getTextAreas(){
+    	return getAllElements(HtmlTextArea.class);
+    }
+    
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
@@ -187,32 +195,32 @@ public class HtmlControlBuilder {
 		return htmlElementList;
 	}
 	
-	private <T extends HtmlElementBase> T getElement(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
+	private <T extends HtmlElementBase> T getElement(Class<T> element, final By byLocator)  { //Todo: elegánsabb hiba kezelés   	
 	    	System.out.println(element.getName());
-	    	return getElementWithWait(element, getWebElement().findElement(byConstraint) ,byConstraint);
+	    	return getElementWithWait(element, getWebElement().findElement(byLocator) ,byLocator);
 	    }
 	   
-		private <T extends HtmlElementBase> T getElementWithWait(Class<T> element, WebElement webElement, final By byConstraint) {
-			try {
-	    		for (int i = 0; i < 10; i++) {
-	    			try {
-	    				Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-	    				return constructor.newInstance( webElement, getDriver(), byConstraint);
-	    			}
-	    			catch (Exception e) {
-	    				Thread.sleep(1000);
-	    			}
-	    		}
-	    		
-		    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
-		    	return constructor.newInstance( webElement, getDriver(), byConstraint);
-	
-	    	}
-	    	catch (Exception e) {
-	    		System.err.println("Element not find: " + byConstraint.toString());
-	    		e.printStackTrace();
-	    		throw new RuntimeException(e);
-	        }
+	private <T extends HtmlElementBase> T getElementWithWait(Class<T> element, WebElement webElement, final By byLocator) {
+		try {
+    		for (int i = 0; i < 10; i++) {
+    			try {
+    				Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
+    				return constructor.newInstance( webElement, getDriver(), byLocator);
+    			}
+    			catch (Exception e) {
+    				Thread.sleep(1000);
+    			}
+    		}
+    		
+	    	Constructor<T> constructor = element.getConstructor(WebElement.class, WebDriver.class, By.class);
+	    	return constructor.newInstance( webElement, getDriver(), byLocator);
+
+    	}
+    	catch (Exception e) {
+    		System.err.println("Element not find: " + byLocator.toString());
+    		e.printStackTrace();
+    		throw new RuntimeException(e);
+        }
 	}
 
 }

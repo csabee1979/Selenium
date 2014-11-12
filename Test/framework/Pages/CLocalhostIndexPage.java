@@ -78,4 +78,9 @@ public class CLocalhostIndexPage extends CPageBase{
 		}
 		
 	}
+	
+	public void setTextArea(String text){
+		//getMainWindow().getDocument().getControls().getTextArea(By.id("textarea")).TypeText(text);
+		getMainWindow().getDocument().getControls().getTextAreas().get(0).TypeText(text);;
+	}
 }

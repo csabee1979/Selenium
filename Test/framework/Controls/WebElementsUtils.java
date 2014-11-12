@@ -29,6 +29,7 @@ public class WebElementsUtils {
 			case "Controls.HtmlTableRow" : return By.tagName("tr");
 			case "Controls.HtmlTableCell" : return By.tagName("td");
 			case "Controls.HtmlTableHeaderCell" : return By.tagName("th");
+			case "Controls.HtmlTextArea" : return By.tagName("textarea");
 			
 		default:
 			throw new RuntimeException("Unknown element!");

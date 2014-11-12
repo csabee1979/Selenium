@@ -102,6 +102,14 @@ public class HtmlControlBuilder {
     	return getElement(HtmlTextArea.class, byLocator);
     }
     
+    public HtmlDefinitionList getDefinitionList(final By byLocator){
+    	return getElement(HtmlDefinitionList.class, byLocator);
+    }
+    
+    public HtmlDefinitionListElement getDefinitionListElement(final By byLocator){
+    	return getElement(HtmlDefinitionListElement.class, byLocator);
+    }
+    
     public List<HtmlBody> getBodys(){
     	return getAllElements(HtmlBody.class);	    		
     }
@@ -170,6 +178,14 @@ public class HtmlControlBuilder {
     	return getAllElements(HtmlTextArea.class);
     }
     
+    public List<HtmlDefinitionList> getDefinitionLists(){
+    	return getAllElements(HtmlDefinitionList.class);
+    }
+    
+    public List<HtmlDefinitionListElement> getDefinitionListElements(){
+    	return getAllElements(HtmlDefinitionListElement.class);
+    }
+    
     public WebElement getWebElement(final By byConstraint){
         return  _webElement.findElement(byConstraint);   	
     }
@@ -177,19 +193,21 @@ public class HtmlControlBuilder {
 
     private <T extends HtmlElementBase> List<T> getAllElements(Class<T> element) {
     	String className = element.getName();   	
-        By defaultLocating = WebElementsUtils.getDefaultLocator(className);
+        List<By> defaultLocatingList = WebElementsUtils.getDefaultLocator(className);
     	
-    	return getElements(element, defaultLocating);
+    	return getElements(element, defaultLocatingList);
     }
 	    
-    private <T extends HtmlElementBase> List<T> getElements(Class<T> element, final By byConstraint)  { //Todo: elegánsabb hiba kezelés   	
+    private <T extends HtmlElementBase> List<T> getElements(Class<T> element, final List<By> byLocatorList)  { //Todo: elegánsabb hiba kezelés   	
 		System.out.println(element.getName());
-		
-		List<WebElement> webElementList = getWebElement().findElements(byConstraint);
 		List<T> htmlElementList = new ArrayList<T>();
 		
-		for (WebElement webElement : webElementList){
-			htmlElementList.add(getElementWithWait(element, webElement, byConstraint));
+		for(By byLocator :  byLocatorList) {		
+			List<WebElement> webElementList = getWebElement().findElements(byLocator);
+			
+			for (WebElement webElement : webElementList){
+				htmlElementList.add(getElementWithWait(element, webElement, byLocator));
+			}
 		}
 		
 		return htmlElementList;

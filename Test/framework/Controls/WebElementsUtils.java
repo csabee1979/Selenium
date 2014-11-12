@@ -1,6 +1,8 @@
 package Controls;
 
 import java.security.InvalidKeyException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 
@@ -10,29 +12,87 @@ public class WebElementsUtils {
 	
 	}
 	
-	public static By getDefaultLocator(String elementClassName) {
+	public static List<By> getDefaultLocator(String elementClassName) {
+		
+		List<By> elementLocators = new ArrayList<By>();
+		
 		switch (elementClassName){
-			case "Controls.HtmlBody" : return By.tagName("body");
-			case "Controls.HtmlForm" : return By.tagName("form");
-			case "Controls.HtmlFrame" : return By.tagName("frame");
-			case "Controls.HtmlInput" : return By.tagName("input"); 
-			case "Controls.HtmlButton" : return By.tagName("button");
-			case "Controls.HtmlCheckBox" : return By.cssSelector("input[type='checkbox']");
-			case "Controls.HtmlRadioButton" : return By.cssSelector("input[type='radio']");
-			case "Controls.HtmlLink" : return By.tagName("a");
-			case "Controls.HtmlOption" : return By.tagName("option");
-			case "Controls.HtmlSelect" : return By.tagName("select");
-			case "Controls.HtmlDiv" : return By.tagName("div");
-			case "Controls.HtmlImage" : return By.tagName("img");
-			case "Controls.HtmlTable" : return By.tagName("table");
-			case "Controls.HtmlTableBody" : return By.tagName("tbody");
-			case "Controls.HtmlTableRow" : return By.tagName("tr");
-			case "Controls.HtmlTableCell" : return By.tagName("td");
-			case "Controls.HtmlTableHeaderCell" : return By.tagName("th");
-			case "Controls.HtmlTextArea" : return By.tagName("textarea");
+			case "Controls.HtmlBody" :
+				elementLocators.add(By.tagName("form"));
+				break;
+			case "Controls.HtmlForm" : 
+				elementLocators.add(By.tagName("form"));
+				break;
+			case "Controls.HtmlFrame" :
+				elementLocators.add(By.tagName("frame"));
+				break;
+			case "Controls.HtmlInput" :
+				elementLocators.add(By.tagName("input"));
+				break;
+			case "Controls.HtmlButton" :
+				elementLocators.add(By.tagName("button"));
+				break;
+			case "Controls.HtmlCheckBox" :
+				elementLocators.add(By.cssSelector("input[type='checkbox']"));
+				break;
+			case "Controls.HtmlRadioButton" : 
+				elementLocators.add(By.cssSelector("input[type='radio']"));
+				break;
+			case "Controls.HtmlLink" :
+				elementLocators.add(By.tagName("a"));
+				break;
+			case "Controls.HtmlOption" :
+				elementLocators.add(By.tagName("option"));
+				break;
+			case "Controls.HtmlSelect" : 
+				elementLocators.add(By.tagName("select"));
+				break;
+			case "Controls.HtmlDiv" :
+				elementLocators.add(By.tagName("div"));
+				break;
+			case "Controls.HtmlImage" : 
+				elementLocators.add(By.tagName("img"));
+				break;
+			case "Controls.HtmlTable" : 
+				elementLocators.add(By.tagName("table"));
+				break;
+			case "Controls.HtmlTableBody" : 
+				elementLocators.add(By.tagName("tbody"));
+				break;
+			case "Controls.HtmlTableRow" : 
+				elementLocators.add(By.tagName("tr"));
+				break;
+			case "Controls.HtmlTableCell" : 
+				elementLocators.add(By.tagName("td"));
+				break;
+			case "Controls.HtmlTableHeaderCell" : 
+				elementLocators.add(By.tagName("th"));
+				break;
+			case "Controls.HtmlTextArea" : 
+				elementLocators.add(By.tagName("textarea"));
+				break;
+			case "Controls.HtmlListElement" : 
+				elementLocators.add(By.tagName("li"));
+				break;
+			case "Controls.HtmlOrderedList" : 
+				elementLocators.add(By.tagName("ol"));
+				break;
+			case "Controls.HtmlUnorderedList" :
+				elementLocators.add(By.tagName("ul"));
+				break;				
+			case "Controls.HtmlDefinitionList" : 
+				elementLocators.add(By.tagName("dl"));				
+				break;
+			case "Controls.HtmlDefinitionListElement" : 
+				elementLocators.add(By.tagName("dd"));		
+				elementLocators.add(By.tagName("dt"));	
+				break;
+				
 			
 		default:
 			throw new RuntimeException("Unknown element!");
 		}
+		
+		return  elementLocators;
 	}
 }

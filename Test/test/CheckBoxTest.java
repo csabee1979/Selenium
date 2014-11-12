@@ -26,5 +26,6 @@ public class CheckBoxTest extends CTestBase {
 		local.setRadioButtons();
 		local.selectTableHeaders();
 		local.setTextArea("Az anyja mindenit!\n Azt hát!");
+		local.selectDefinitions();
 	}
 }

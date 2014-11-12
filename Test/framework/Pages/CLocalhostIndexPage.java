@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 
 import Browsers.CWebBrowser;
 import Controls.HtmlCheckBox;
+import Controls.HtmlDefinitionListElement;
 import Controls.HtmlRadioButton;
 import Controls.HtmlSelect;
 import Controls.HtmlTable;
@@ -81,6 +82,15 @@ public class CLocalhostIndexPage extends CPageBase{
 	
 	public void setTextArea(String text){
 		//getMainWindow().getDocument().getControls().getTextArea(By.id("textarea")).TypeText(text);
-		getMainWindow().getDocument().getControls().getTextAreas().get(0).TypeText(text);;
+		getMainWindow().getDocument().getControls().getTextAreas().get(0).TypeText(text);
+	}
+	
+	public void selectDefinitions(){
+		List<HtmlDefinitionListElement> definitionListELements = getMainWindow().getDocument().getControls().getDefinitionListElements();
+		
+		for(HtmlDefinitionListElement listElement : definitionListELements){
+			System.out.println(listElement.getText());
+		}
+		
 	}
 }

@@ -78,6 +78,25 @@ public class HtmlControlBuilder {
     	return getElement(HtmlRadioButton.class, byLocator);	    		
     }
     
+    public HtmlTable getTable(final By byLocator){
+    	return getElement(HtmlTable.class, byLocator);	    		
+    }
+    
+    public HtmlTableBody getTableBody(final By byLocator){
+    	return getElement(HtmlTableBody.class, byLocator);	    		
+    }
+
+    public HtmlTableRow getTableRow(final By byLocator){
+    	return getElement(HtmlTableRow.class, byLocator);	    		
+    }
+
+    public HtmlTableCell getTableCell(final By byLocator){
+    	return getElement(HtmlTableCell.class, byLocator);	    		
+    }
+
+    public HtmlTableHeaderCell getTableHeaderCell(final By byLocator){
+    	return getElement(HtmlTableHeaderCell.class, byLocator);	    		
+    }
     
     public List<HtmlBody> getBodys(){
     	return getAllElements(HtmlBody.class);	    		
@@ -121,6 +140,26 @@ public class HtmlControlBuilder {
     
     public List<HtmlRadioButton> getRadioButtons(){
     	return getAllElements(HtmlRadioButton.class);	    		
+    }
+
+    public List<HtmlTable> getTables(){
+    	return getAllElements(HtmlTable.class);	    		
+    }
+    
+    public List<HtmlTableBody> getTableBodys(){
+    	return getAllElements(HtmlTableBody.class);	    		
+    }
+
+    public List<HtmlTableRow> getTableRows(){
+    	return getAllElements(HtmlTableRow.class);	    		
+    }
+    
+    public List<HtmlTableCell> getTableCells(){
+    	return getAllElements(HtmlTableCell.class);	    		
+    }
+    
+    public List<HtmlTableHeaderCell> getTableHeaderCells(){
+    	return getAllElements(HtmlTableHeaderCell.class);	    		
     }
     
     public WebElement getWebElement(final By byConstraint){

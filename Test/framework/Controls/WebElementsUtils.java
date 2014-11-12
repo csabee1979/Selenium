@@ -24,7 +24,12 @@ public class WebElementsUtils {
 			case "Controls.HtmlSelect" : return By.tagName("select");
 			case "Controls.HtmlDiv" : return By.tagName("div");
 			case "Controls.HtmlImage" : return By.tagName("img");
-
+			case "Controls.HtmlTable" : return By.tagName("table");
+			case "Controls.HtmlTableBody" : return By.tagName("tbody");
+			case "Controls.HtmlTableRow" : return By.tagName("tr");
+			case "Controls.HtmlTableCell" : return By.tagName("td");
+			case "Controls.HtmlTableHeaderCell" : return By.tagName("th");
+			
 		default:
 			throw new RuntimeException("Unknown element!");
 		}

@@ -8,6 +8,9 @@ import Browsers.CWebBrowser;
 import Controls.HtmlCheckBox;
 import Controls.HtmlRadioButton;
 import Controls.HtmlSelect;
+import Controls.HtmlTable;
+import Controls.HtmlTableBody;
+import Controls.HtmlTableHeaderCell;
 import PageObjectBase.CPageBase;
 import PageObjectBase.FrameIdProvider;
 
@@ -63,4 +66,16 @@ public class CLocalhostIndexPage extends CPageBase{
 		}
 	}
 
+	public void selectTableHeaders(){
+		
+		HtmlTable table = getMainWindow().getDocument().getControls().getTables().get(0);
+		HtmlTableBody tablebody = table.getControls().getTableBodys().get(0);
+		List<HtmlTableHeaderCell> tc = tablebody.getControls().getTableHeaderCells();
+		
+
+		for(HtmlTableHeaderCell headerCell : tc){
+			System.out.println(headerCell.getText());
+		}
+		
+	}
 }

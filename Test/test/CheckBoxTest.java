@@ -24,5 +24,6 @@ public class CheckBoxTest extends CTestBase {
 		CLocalhostIndexPage local = PageLoader.loadPage(CLocalhostIndexPage.class, browser);
 		local.selectAllCheckboxes();
 		local.setRadioButtons();
+		local.selectTableHeaders();
 	}
 }
